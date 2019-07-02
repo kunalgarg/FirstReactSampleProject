@@ -9,7 +9,7 @@ class Dashboard extends Component {
   async componentDidMount() {
     const { empDetailsService } = this.props;
     empDetailsService().then(() => {
-      console.log('Hello')
+      console.log('Hello first commit')
     });
   }
 
