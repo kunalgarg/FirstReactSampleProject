@@ -1,39 +1,119 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, StatusBar, View, TouchableOpacity } from "react-native";
+import { TouchableHighlight, StyleSheet, Text, StatusBar, View, TouchableOpacity, FlatList, alert, RefreshControl } from "react-native";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as EmployeeAction from '../Actions/EmployeeAction';
 
+class FlatListItems extends Component {
+  render() {
+    return (
+      <View>
+        <View style={{
+          flex: 1,
+          backgroundColor: this.props.index == 1 ? 'green' : 'gray', // not working
+          height: 50,
+          justifyContent: 'center',
+          padding: 5
+        }}>
+          <Text style={{ justifyContent: 'center', color: "#ffffff" }}>{this.props.item.name}</Text>
+        </View>
+      </View>
+
+    );
+  }
+}
+
+
 class Dashboard extends Component {
+
+  static navigationOptions = {
+    title: 'Dashboard',
+    headerBackTitle: null,
+    headerRight: <TouchableOpacity style={{ height: 50, width: 50, backgroundColor: 'blue' }}
+      onPress={this.callNextScreenHandler}>
+      <Text>Next</Text>
+    </TouchableOpacity>
+
+  };
 
   async componentDidMount() {
     const { empDetailsService } = this.props;
     empDetailsService().then(() => {
-      console.log('Hello first commit')
+      console.log('Hello')
     });
   }
 
-  callNextScreenHandler = () => {
-    this.props.navigation.navigate('Screen1')
-
+  callNextScreenHandler = (item) => {
+    this.props.navigation.navigate('DetailScreen', item.name);
   }
 
   render() {
-    const { empDetailsObj } = this.props;
-    console.log('Employee Detailssss', empDetailsObj.list)
     return (
+      <View style={{ flex: 1, marginTop: 0, backgroundColor: '#ffffff' }}>
+        <FlatList
+          data={this.props.empDetailsObj.list}
+          ItemSeparatorComponent={this.FlatListItemSeparator}
+          ListHeaderComponent={this.FlatListHeader}
+          stickyHeaderIndices={[0]}
+          renderItem={({ item, index }) => {
+            return (
+              console.log('Index = ', index),
+              <TouchableHighlight onPress={() => this.callNextScreenHandler(item)}>
+                <FlatListItems item={item}> index = {index}</FlatListItems>
+              </TouchableHighlight>
 
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Dashboard</Text>
-        {empDetailsObj.page === 2 &&
-          <Text style={{ color: '#000000' }}>{empDetailsObj.list[1].email}</Text>
-        }
-        <TouchableOpacity style={{ height: 60, width: 60, backgroundColor: '#8f8f8f' }} onPress={this.callNextScreenHandler}>
-
-        </TouchableOpacity>
+            );
+          }}
+        //renderItem={this.renderEmployees}
+        />
       </View>
     );
   }
+
+  FlatListItemSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: "#000000",
+        }}
+      />
+    );
+  }
+
+  FlatListHeader = () => {
+    var headerView = (
+      <View style={{
+        weight: '100%', height: 40, backgroundColor: '#4CAF50', alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <Text style={{
+          textAlign: 'center',
+          color: '#fff',
+          fontSize: 18
+        }}> Contact List </Text>
+      </View>
+    );
+    return headerView;
+  };
+
+  renderEmployees = (employee) => {
+    console.log("render employee = ", employee.item)
+    return (
+      <TouchableOpacity style={{ flex: 1, width: 300, height: 50 }} onPress={() => this.actionOnRow}>
+        <View style={{ flex: 1, width: 300, height: 50, flexDirection: 'row', backgroundColor: 'white' }}>
+          <Text> {employee.item.lastName}</Text>
+        </View>
+      </TouchableOpacity>
+    )
+  }
+
+  actionOnRow = () => {
+    alert('Web Service Failure')
+    // your code on item press
+  };
+
 }
 
 const mapStateToProps = (state) => ({

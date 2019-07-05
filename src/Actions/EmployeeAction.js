@@ -22,7 +22,9 @@ const getEmpDetailsMapping = (dataObj) => {
         list: dataObj.data.map((item) => {
             return ({
                 email: item.email,
-                name: item.first_name
+                name: item.first_name,
+                lastName: item.last_name,
+                image: item.avatar
             });
         }),
     }

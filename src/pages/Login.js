@@ -3,12 +3,13 @@ import { Platform, StyleSheet, Text, StatusBar, View } from "react-native";
 
 import Logo from "../components/Logo";
 import Form from "../components/Form";
-//import { StackActions } from "react-navigation";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 class Login extends Component {
 
   static navigationOptions = {
-    header: null
+    header: null,
+    headerBackTitle: null
   };
 
   loginHandler = () => {
