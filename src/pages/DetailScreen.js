@@ -7,7 +7,7 @@ import * as EmployeeAction from '../Actions/EmployeeAction';
 class DetailScreen extends Component {
     constructor(props) {
         super(props);
-        this.param = this.props.navigation.item;
+        this.param = this.props.navigation.state.params
     }
 
     static navigationOptions = {
@@ -20,10 +20,10 @@ class DetailScreen extends Component {
             <View style={{ flex: 1 }}>
                 <Image source={{ uri: this.param.image }} style={{ height: 200, margin: 5, backgroundColor: 'gray' }} />
                 <View style={styles.TextBorder}>
-                    <Text style={styles.TextStyle}>Full name: {this.param.name} {this.param.LastName}</Text>
+                    <Text style={styles.TextStyle}>Full name: {this.param.name} {this.param.lastName}</Text>
                 </View>
                 <View style={styles.TextBorder}>
-                    <Text style={styles.TextStyle}>Email: Hardcoded text</Text>
+                    <Text style={styles.TextStyle}>Email: {this.param.email}</Text>
                 </View>
             </View>
         );

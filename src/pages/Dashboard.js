@@ -44,7 +44,8 @@ class Dashboard extends Component {
   }
 
   callNextScreenHandler = (item) => {
-    this.props.navigation.navigate('DetailScreen', item.name);
+    console.log(item);
+    this.props.navigation.navigate('DetailScreen', item);
   }
 
   render() {
@@ -57,7 +58,6 @@ class Dashboard extends Component {
           stickyHeaderIndices={[0]}
           renderItem={({ item, index }) => {
             return (
-              console.log('Index = ', index),
               <TouchableHighlight onPress={() => this.callNextScreenHandler(item)}>
                 <FlatListItems item={item}> index = {index}</FlatListItems>
               </TouchableHighlight>
