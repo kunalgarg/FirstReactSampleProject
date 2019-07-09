@@ -26,15 +26,21 @@ class FlatListItems extends Component {
 
 class Dashboard extends Component {
 
-  static navigationOptions = {
+
+  static navigationOptions = ({ navigation }) => ({
     title: 'Dashboard',
     headerBackTitle: null,
-    headerRight: <TouchableOpacity style={{ height: 50, width: 50, backgroundColor: 'blue' }}
-      onPress={this.callNextScreenHandler}>
+    headerRight: <TouchableOpacity style={{ height: 18, width: 50 }}
+      onPress={() => navigation.navigate('Mralexgray')}>
       <Text>Next</Text>
     </TouchableOpacity>
 
-  };
+  });
+
+  navigateToNextServiceCall = () => {
+    console.log('Navigation bar button pressed')
+    this.props.navigate.navigate('Login');
+  }
 
   async componentDidMount() {
     const { empDetailsService } = this.props;
@@ -56,6 +62,7 @@ class Dashboard extends Component {
           ItemSeparatorComponent={this.FlatListItemSeparator}
           ListHeaderComponent={this.FlatListHeader}
           stickyHeaderIndices={[0]}
+          bounces={false}
           renderItem={({ item, index }) => {
             return (
               <TouchableHighlight onPress={() => this.callNextScreenHandler(item)}>
@@ -64,6 +71,7 @@ class Dashboard extends Component {
 
             );
           }}
+          keyExtractor={(item) => item.email}
         //renderItem={this.renderEmployees}
         />
       </View>

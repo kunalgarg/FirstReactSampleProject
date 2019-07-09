@@ -36,14 +36,14 @@ export default class Form extends Component {
         <TextInput
           style={styles.inputBox}
           underlineColorAndroid="rgba(0,0,0,0)"
-          placeholder="Email"
+          placeholder="Emailllll"
           placeholderTextColor="#ffffff"
           onChangeText={text => this.setState({ username: text })}
         />
         <TextInput
           style={styles.inputBox}
           underlineColorAndroid="rgba(0,0,0,0)"
-          placeholder="Password"
+          placeholder="Passwordddd"
           placeholderTextColor="#ffffff"
           secureTextEntry
           onChangeText={text => this.setState({ password: text })}
