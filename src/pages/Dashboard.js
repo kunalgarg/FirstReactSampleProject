@@ -3,11 +3,13 @@ import { TouchableHighlight, StyleSheet, Text, StatusBar, View, TouchableOpacity
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as EmployeeAction from '../Actions/EmployeeAction';
+import store from '../Store';
 
 class FlatListItems extends Component {
   render() {
+    console.log(' dashboard controller get details from store', store.getState())
     return (
-      <View>
+      < View >
         <View style={{
           flex: 1,
           backgroundColor: this.props.index == 1 ? 'green' : 'gray', // not working
@@ -17,7 +19,7 @@ class FlatListItems extends Component {
         }}>
           <Text style={{ justifyContent: 'center', color: "#ffffff" }}>{this.props.item.name}</Text>
         </View>
-      </View>
+      </View >
 
     );
   }
@@ -29,7 +31,7 @@ class Dashboard extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     title: 'Dashboard',
-    headerBackTitle: null,
+    headerTitleStyle: { alignSelf: 'center', textAlign: 'center', flex: 1 },
     headerRight: <TouchableOpacity style={{ height: 18, width: 50 }}
       onPress={() => navigation.navigate('Mralexgray')}>
       <Text>Next</Text>

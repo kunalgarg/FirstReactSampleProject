@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from '../Store';
 
 export function empDetailsService() {
     return (dispatch) => {
@@ -6,6 +7,7 @@ export function empDetailsService() {
             .then(function (response) {
                 console.log('Employee Details', response.data);
                 const empDetails = getEmpDetailsMapping(response.data)
+                // store.dispatch({ type: 'EMP_DETAILS', payload: { data: empDetails } });
                 dispatch({ type: 'EMP_DETAILS', payload: { data: empDetails } });
             })
             .catch(function (error) {
