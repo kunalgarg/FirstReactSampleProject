@@ -1,0 +1,15 @@
+{
+  "login": {
+    "welcome": "{{name}}, ברוך הבא לאפליקציה המתורגמת!",
+    "login_button": "התחבר",
+    "signup_button": "הרשם"
+  },
+  "user_profile": {
+    "title": "הפרופיל שלך"
+  },
+  "dashboard": {
+    "Contact_List_Title": "רשימת אנשי קשר",
+    "Dashboard_Title": "מרכז השליטה",
+    "Next": "הבא"
+  }
+}

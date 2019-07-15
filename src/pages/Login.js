@@ -3,7 +3,7 @@ import { Platform, StyleSheet, Text, StatusBar, View } from "react-native";
 
 import Logo from "../components/Logo";
 import Form from "../components/Form";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import Spinner from 'react-native-loading-spinner-overlay';
 
 class Login extends Component {
 
@@ -12,8 +12,20 @@ class Login extends Component {
     headerBackTitle: null
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false
+    }
+  }
+
   loginHandler = () => {
-    this.props.navigation.navigate("Dashboard");
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.props.navigation.navigate("Dashboard");
+      this.setState({ loading: false });
+    }, 2000);
+
   };
 
   render() {
@@ -21,6 +33,18 @@ class Login extends Component {
       <View style={styles.container}>
         <Logo logoText="Welcome to my App" />
         <Form loginClick={this.loginHandler} />
+        {this.state.loading === true &&
+          <Spinner
+            //visibility of Overlay Loading Spinner
+            visible={true}
+            //Text with the Spinner 
+            textContent={''}
+            //Text style of the Spinner Text
+            textStyle={{ color: '#000000' }}
+          />
+        }
+
+
       </View>
     );
   }

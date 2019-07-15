@@ -10,22 +10,20 @@ export function mralexgrayService() {
                 dispatch({ type: 'MRA_DETAILS', payload: { data: mralexgrayDetails } });
             })
             .catch(function (error) {
-                console.log('error hotelLandingPageDetails', error.response);
+                console.log('error hotelLandingPageDetails', error.message);
                 console.log('Request Response For Home Screen Details Failed');
-                alert('Web Service Failure')
+                alert('Web:', error.message);
+
             });
     }
 }
 
 const getMralexgrayMapping = (dataObj) => {
     return {
-        //page: dataObj.page,
         dlist: dataObj.map((item) => {
             return ({
-                //email: item.email,
-                name: item.full_name
-                //lastName: item.last_name,
-                //image: item.avatar
+                name: item.full_name,
+                objId: item.owner.id,
             });
         }),
     }

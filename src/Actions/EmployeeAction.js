@@ -13,7 +13,9 @@ export function empDetailsService() {
             .catch(function (error) {
                 console.log('error hotelLandingPageDetails', error.response);
                 console.log('Request Response For Home Screen Details Failed');
-                alert('Web Service Failure')
+                alert(error.message)
+                //alert('Web Service Failure', error)
+
             });
     }
 }

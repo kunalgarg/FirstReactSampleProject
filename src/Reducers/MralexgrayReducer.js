@@ -8,6 +8,8 @@ const MralexgrayReducer = (state = initialMralexgrayState, action) => {
     switch (type) {
         case 'MRA_DETAILS':
             return { ...state, MralexgrayDetailsObj: payload.data, isLoading: false };
+        case 'MRA_DETAILS_FAILED':
+            return { ...state, isLoading: false };
         default:
             return state;
     }

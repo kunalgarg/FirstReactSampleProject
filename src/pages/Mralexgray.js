@@ -3,6 +3,7 @@ import { TouchableHighlight, StyleSheet, ActivityIndicator, Text, StatusBar, Vie
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as MralexgrayAction from '../Actions/MralexgrayAction';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 
 class FlatListItem extends Component {
@@ -27,6 +28,11 @@ class FlatListItem extends Component {
 
 class Mralexgray extends Component {
 
+
+    componentDidMount() {
+
+    }
+
     static navigationOptions = ({ navigation }) => ({
         title: 'Mralexgray List',
         headerTitleStyle: { alignSelf: 'center', textAlign: 'center', flex: 1 },
@@ -49,7 +55,25 @@ class Mralexgray extends Component {
 
         if (this.props.isLoading) {
             return (
-                <ActivityIndicator size="large" color="#0000ff" />
+                // <ActivityIndicator size="large" color="#0000ff" />
+                <View style={{
+                    flex: 1,
+                    paddingTop: 30,
+                    backgroundColor: '#ecf0f1',
+                    padding: 8,
+                }}>
+
+                    {/*<Spinner
+                            //visibility of Overlay Loading Spinner
+                            visible={true}
+                            //Text with the Spinner 
+                            textContent={'Loading...'}
+                            //Text style of the Spinner Text
+                            textStyle={{ color: '#000000' }}
+                        />*/}
+                    <ActivityIndicator size="large" color="#0000ff" />
+
+                </View>
             )
         }
 

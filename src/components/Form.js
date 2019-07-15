@@ -22,12 +22,14 @@ export default class Form extends Component {
   login() {
     console.log(this.state.username);
     console.log(this.state.password);
-
     if (!validateEmail(this.state.username)) {
       Alert.alert("Please enter valid email id!");
-    } else {
-      Alert.alert("You are welcome");
+      return
+    } else if (this.state.password != '12345') {
+      Alert.alert("Please enter valid Password!");
+      return
     }
+    this.props.loginClick()
   }
 
   render() {
@@ -36,14 +38,14 @@ export default class Form extends Component {
         <TextInput
           style={styles.inputBox}
           underlineColorAndroid="rgba(0,0,0,0)"
-          placeholder="Emailllll"
+          placeholder="Email"
           placeholderTextColor="#ffffff"
           onChangeText={text => this.setState({ username: text })}
         />
         <TextInput
           style={styles.inputBox}
           underlineColorAndroid="rgba(0,0,0,0)"
-          placeholder="Passwordddd"
+          placeholder="Password"
           placeholderTextColor="#ffffff"
           secureTextEntry
           onChangeText={text => this.setState({ password: text })}
@@ -51,7 +53,7 @@ export default class Form extends Component {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={this.props.loginClick}
+          onPress={this.login.bind(this)}
         >
           <Text style={styles.LoginButton}>Login</Text>
         </TouchableOpacity>
